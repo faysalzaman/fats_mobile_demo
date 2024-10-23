@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use, use_build_context_synchronously
 
+import 'package:fats_mobile_demo/cubit/barcode/barcode_cubit.dart';
 import 'package:fats_mobile_demo/models/PODetailsModel.dart';
 import 'package:fats_mobile_demo/models/POMasterModel.dart';
+import 'package:fats_mobile_demo/screens/Receiving/add_location_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -463,7 +465,7 @@ class _PurchaseOrderScreenState extends State<PurchaseOrderScreen> {
                                       focusColor: Colors.white,
                                       style: const TextStyle(
                                         color: Colors.black,
-                                        fontSize: 15,
+                                        fontSize: 12,
                                       ),
                                       decoration: const InputDecoration(
                                         border: InputBorder.none,
@@ -621,38 +623,63 @@ class _PurchaseOrderScreenState extends State<PurchaseOrderScreen> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            brand.add(selectBrand.toString());
-                            model.add(modelController.text);
-                            qty.add(qtyController.text);
-                            assetClass.add(selectBrand.toString());
-                            mCode.add(_mCode);
-                            sCode.add(_sCode);
-                            majorDescription.add(mainDescription);
-                            minorDescription.add(selectCategory.toString());
-                            _tableBrand.add(selectCategory.toString());
-                          });
-                        },
-                        icon: const Icon(Icons.add, color: Colors.white),
-                        label: const Text(
-                          "Add Item",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              setState(() {
+                                brand.add(selectBrand.toString());
+                                model.add(modelController.text);
+                                qty.add(qtyController.text);
+                                assetClass.add(selectBrand.toString());
+                                mCode.add(_mCode);
+                                sCode.add(_sCode);
+                                majorDescription.add(mainDescription);
+                                minorDescription.add(selectCategory.toString());
+                                _tableBrand.add(selectCategory.toString());
+                              });
+                            },
+                            icon: const Icon(Icons.add, color: Colors.white),
+                            label: const Text(
+                              "Add Item",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Constant.primaryColor,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              elevation: 3,
+                            ),
                           ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Constant.primaryColor,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                          // add one more button here name Add Location
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              Get.to(AddLocationScreen());
+                            },
+                            icon: const Icon(Icons.add, color: Colors.white),
+                            label: const Text(
+                              "Add Location",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Constant.primaryColor,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 12),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              elevation: 3,
+                            ),
                           ),
-                          elevation: 3,
-                        ),
+                        ],
                       ),
                       const SizedBox(height: 10),
                       Container(
@@ -866,32 +893,44 @@ class _PurchaseOrderScreenState extends State<PurchaseOrderScreen> {
                                         widget.poDetail.quantity.toString()),
                                     mCode[i],
                                     // "widget.businessUnit",
-                                    "",
+                                    BarcodeCubit.get(context).businessUnit,
                                     majorDescription[i],
                                     sCode[i],
                                     // _tableBrand[i],
                                     "${_tableBrand[i]} - ${widget.poDetail.itemDescription.toString()}",
                                     "${_tableBrand[i]} ${brand[i]} ${model[i]}",
                                     // "widget.country",
-                                    "",
+                                    BarcodeCubit.get(context).selectCountry,
                                     // "widget.region",
-                                    "",
+                                    BarcodeCubit.get(context)
+                                        .areaController
+                                        .text,
                                     // "widget.city",
-                                    "",
+                                    BarcodeCubit.get(context).selectCity,
                                     // "widget.departmentCode",
-                                    "",
+                                    BarcodeCubit.get(context)
+                                        .departmentCodeController
+                                        .text,
                                     // "widget.department",
-                                    "",
+                                    BarcodeCubit.get(context)
+                                        .businessNameController
+                                        .text,
                                     // "widget.buildingNumber",
-                                    "",
+                                    BarcodeCubit.get(context)
+                                        .buildingNoController
+                                        .text,
                                     // "widget.floorNumber",
-                                    "",
+                                    BarcodeCubit.get(context).selectFloorNo,
                                     model[i],
                                     brand[i],
                                     // "widget.buildingName",
-                                    "",
+                                    BarcodeCubit.get(context)
+                                        .buildingNameController
+                                        .text,
                                     // "widget.buildingAddress",
-                                    "",
+                                    BarcodeCubit.get(context)
+                                        .buildingAddressController
+                                        .text,
                                     userLoginId.toString().replaceAll("\"", ""),
                                   ).then((value) {
                                     Navigator.of(context).pop();

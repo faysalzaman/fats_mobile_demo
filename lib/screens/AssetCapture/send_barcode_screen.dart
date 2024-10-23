@@ -374,7 +374,7 @@ class _SendBarCodeScreenState extends State<SendBarCodeScreen> {
                                   border: Border.all(
                                     color: Colors.grey,
                                   ),
-                                  borderRadius: BorderRadius.circular(20),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: DropdownButtonFormField(
                                   value: selectBrand,
