@@ -145,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: "Enter Login Id",
                           contentPadding: EdgeInsets.symmetric(
                             horizontal: 10,
-                            vertical: 20,
+                            vertical: 10,
                           ),
                           border: InputBorder.none,
                         ),
@@ -208,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: "Enter Password",
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 10,
-                            vertical: 20,
+                            vertical: 10,
                           ),
                           border: InputBorder.none,
                           suffixIcon: IconButton(
@@ -258,7 +258,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: DropdownButtonFormField(
                         value: languageValue,
                         isExpanded: true,
-                        padding: const EdgeInsets.symmetric(vertical: 10),
                         items: languageList.map((value) {
                           return DropdownMenuItem(
                             value: value,

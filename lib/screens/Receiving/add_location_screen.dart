@@ -543,7 +543,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
                       child: ButtonWidget(
                         fontSize: 15,
                         color: Constant.primaryColor,
-                        title: "NEXT",
+                        title: "SAVE",
                         onPressed: () {
                           BarcodeCubit.get(context).submiitBarcode(context);
                         },
